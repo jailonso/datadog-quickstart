@@ -1,0 +1,40 @@
+datadog:
+  clusterName: guestbook
+  apiKeyExistingSecret: datadog-keys
+  kubeStateMetricsEnabled: true
+  apm:
+    enabled: true
+  logs:
+    enabled: true
+    containerCollectAll: true
+  processAgent:
+    processCollection: true
+  systemProbe:
+    enableOOMKill: true
+    enableTCPQueueLength: true
+    collectDNSStats: true
+  networkMonitoring:
+    enabled: true
+  dogstatsd:
+    useHostPort: true
+  orchestratorExplorer:
+    enabled: true
+  env:
+    - name: DD_CONTAINER_EXCLUDE
+      value: "image:datadog*"
+    - name: DD_ENV
+      value: "guestbook"
+  podSecurity:
+    apparmor:
+      enabled: false
+agents:
+  tolerations:
+    - operator: Exists
+clusterAgent:
+  admissionController:
+    enabled: true
+    mutateUnlabelled: true
+  env:
+    - name: DD_ENV
+      value: "guestbook"
+  confd:
