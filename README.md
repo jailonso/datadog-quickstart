@@ -3,7 +3,15 @@
 The goal of this repo is to show how easy is the setup of Datadog.
 
 1- Deploy Datadog following Datadog in-app instructions using attached values.yaml
+
+Create a file with the secrets - secrets.txt
 ```
+api-key=xxx
+token=<ThirtyX2XcharactersXlongXtoken>
+```
+Deploy Datadog
+```
+kubectl create secret generic datadog-keys --from-env-file=secrets.txt
 helm install datadog datadog/datadog -f values.yaml 
 ```
 2- Deploy Guestbook app https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
